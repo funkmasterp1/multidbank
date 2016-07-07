@@ -15,43 +15,74 @@
 
 #TWO acounts preexisting
 
-allAccounts = [[1000,123,100], [1001,22,222]]
 
-begin
-	yn = "y"
-	
 
-	puts 'NOW'
-	puts 'Enter new pin'
-	newPin = gets.chomp.to_i
+puts 'Please dont steal money'
 
-	puts 'Enter Balance'
-	balance = gets.chomp.to_i
+allAccounts = [[1000,123,100, 'Peter'], [1001,22,222, 'Michael']]
 
-	allAccounts.push([(allAccounts[-1].first+1),newPin,balance])
+puts '1-new account 2- view account'
+#rep = gets.chomp.to_i
 
-	puts allAccounts
-	#allAccounts = allAccounts
+loop do
+	while user_input = gets.chomp
+		case user_input
+		when "1"
+			puts 'NOW'
+			puts 'Enter new pin'
+			newPin = gets.chomp.to_i
 
-	puts 'New account? (y/n)'
-	yn = gets.chomp
-end while yn == "y"
+			puts 'Enter Balance'
+			balance = gets.chomp.to_i
 
-puts 'Account Number?'
-#What account number are you looking for?
-accnum = gets.chomp.to_i
+			puts 'Enter your name, as it appears on your Passport'
+			name = gets.chomp.to_s
 
-#Search MDArray for that number
-search_item = nil
-allAccounts.each do |item|
-	if item.include? accnum
-		search_item = item
+			allAccounts.push([(allAccounts[-1].first+1),newPin,balance, name])
+
+			puts 'Awesome ' + name + ' your new account number is: '
+			puts allAccounts[-1].first
+			#allAccounts = allAccounts
+			puts '1-new account 2- view account'
+
+		when "2"
+			puts 'Account Number?'
+			#What account number are you looking for?
+			accnum = gets.chomp.to_i
+
+			#Search MDArray for that number
+			search_item = nil
+			allAccounts.each do |item|
+				if item.include? accnum
+					search_item = item
+
+
+					puts 'Ender pin'
+					enter = gets.chomp.to_i
+					if enter == search_item[1]
+						puts 'Welcome ' + search_item[3].to_s
+						puts 'account: ' + search_item[0].to_s
+						puts 'balance: ' + search_item[2].to_s
+						puts '1-new account 2- view account'
+					else
+						puts 'No- wrong PIN'
+						puts '1-new account 2- view account'
+					end
+					break
+					else
+						puts 'No Account'
+						puts '1-new account 2- view account'
+					end
+			end
+
+		when "exit"
+			abort
+		else
+			puts '1-new account 2- view account'
+		break
+		end
 	end
 end
-puts search_item
-puts 'account: '
-puts search_item[0]
-
 
 
 
